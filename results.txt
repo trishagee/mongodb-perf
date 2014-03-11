@@ -1,0 +1,44 @@
+shouldInsertString
+ r 2.11.4
+  Test took: 2.974 seconds
+  3,362 ops per second
+
+  Test took: 2.656 seconds
+  3,765 ops per second
+
+  Test took: 3.155 seconds
+  3,170 ops per second
+
+
+ r 2.12.0-rc0
+  Test took: 3.521 seconds
+  2,840 ops per second
+
+  Test took: 3.998 seconds
+  2,501 ops per second
+
+  Test took: 3.962 seconds
+  2,524 ops per second
+
+
+shouldInsertInt
+ r 2.11.4
+  Test took: 3.149 seconds
+  3,176 ops per second
+
+  Test took: 2.970 seconds
+  3,367 ops per second
+
+  Test took: 3.019 seconds
+  3,312 ops per second
+
+
+ r 2.12.0-rc0
+  Test took: 3.593 seconds
+  2,783 ops per second
+
+  Test took: 4.141 seconds
+  2,415 ops per second
+
+  Test took: 4.421 seconds
+  2,262 ops per second
