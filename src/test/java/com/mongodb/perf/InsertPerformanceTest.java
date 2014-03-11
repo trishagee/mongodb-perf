@@ -14,40 +14,39 @@
  * limitations under the License.
  */
 
-package com.mongodb.perf;
+package org.mongodb.perf;
 
-import com.mongodb.BasicDBObject;
-import com.mongodb.DB;
-import com.mongodb.DBCollection;
-import com.mongodb.Fixture;
+import org.mongodb.Fixture;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.mongodb.Document;
+import org.mongodb.MongoCollection;
+import org.mongodb.MongoDatabase;
 
 public class InsertPerformanceTest {
     private static final int NUMBER_OF_OPERATIONS = 10000;
     private static final double NUM_MILLIS_IN_SECOND = 1000;
-
-    private DB database;
-    private DBCollection collection;
+    private MongoCollection<Document> collection;
+    private MongoDatabase database;
 
     @Before
     public void setUp() {
         database = Fixture.getDefaultDatabase();
         collection = database.getCollection(this.getClass().getName());
-        collection.drop();
+        collection.tools().drop();
     }
 
     @After
     public void tearDown() {
         if (collection != null) {
-            collection.drop();
+            collection.tools().drop();
         }
     }
 
     private void warmup(int numberOfRuns) {
         for (int i = 0; i < numberOfRuns; i++) {
-            collection.insert(new BasicDBObject("name", "String value"));
+            collection.insert(new Document("name", "String value"));
         }
         System.gc();
         System.gc();
@@ -57,12 +56,12 @@ public class InsertPerformanceTest {
     public void shouldInsertString() {
         // Given
         warmup(10000);
-        collection.remove(new BasicDBObject());
+        collection.find().remove();
 
         // When
         long startTime = System.currentTimeMillis();
         for (int i = 0; i < NUMBER_OF_OPERATIONS; i++) {
-            collection.insert(new BasicDBObject("name", "String value"));
+            collection.insert(new Document("name", "String value"));
         }
         long endTime = System.currentTimeMillis();
 
@@ -75,35 +74,36 @@ public class InsertPerformanceTest {
 
     @Test
     public void shouldTimeBudget() {
-        collection.remove(new BasicDBObject());
+        // to be used in association with tools to output the time at different stages.
+        // Given
+        warmup(10000);
+        collection.find().remove();
 
-        System.out.println("Starting Benchmark");
         // When
         long startTime = System.nanoTime();
-        System.out.printf("%d, start time\n", startTime);
         for (int i = 0; i < 1; i++) {
-            collection.insert(new BasicDBObject("name", "String value"));
+            collection.insert(new Document("name", "String value"));
         }
         long endTime = System.nanoTime();
 
         // Then
-        System.out.printf("%d, end time\n", endTime);
+        System.out.println(startTime);
+        System.out.println(endTime);
         long timeTaken = endTime - startTime;
         System.out.printf("Time taken: %d nanos\n", timeTaken);
-        //205 638 000 nanos
-        //191 837 000 nanos
+        //1613000 nanos
     }
 
     @Test
     public void shouldInsertInt() {
         // Given
         warmup(10000);
-        collection.remove(new BasicDBObject());
+        collection.find().remove();
 
         // When
         long startTime = System.currentTimeMillis();
         for (int i = 0; i < NUMBER_OF_OPERATIONS; i++) {
-            collection.insert(new BasicDBObject("name", 1));
+            collection.insert(new Document("name", 1));
         }
         long endTime = System.currentTimeMillis();
 

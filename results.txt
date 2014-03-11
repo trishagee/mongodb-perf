@@ -1,44 +1,34 @@
-shouldInsertString
- r 2.11.4
-  Test took: 2.974 seconds
-  3,362 ops per second
+String
+        // at commit c4fb7772850d619922ea7c843671b98543dc64c0
+        //        Time taken: 6079 millis
+        //        Test took: 6.079 seconds
+        //        1,645 ops per second
 
-  Test took: 2.656 seconds
-  3,765 ops per second
-
-  Test took: 3.155 seconds
-  3,170 ops per second
-
-
- r 2.12.0-rc0
-  Test took: 3.521 seconds
-  2,840 ops per second
-
-  Test took: 3.998 seconds
-  2,501 ops per second
-
-  Test took: 3.962 seconds
-  2,524 ops per second
+Int
+        // at commit c4fb7772850d619922ea7c843671b98543dc64c0
+        //        Time taken: 5520 millis
+        //        Test took: 5.520 seconds
+        //        1,812 ops per second
 
 
-shouldInsertInt
- r 2.11.4
-  Test took: 3.149 seconds
-  3,176 ops per second
+String
+  Test took: 5.689 seconds
+  1,758 ops per second
 
-  Test took: 2.970 seconds
-  3,367 ops per second
+  Test took: 5.692 seconds
+  1,757 ops per second
 
-  Test took: 3.019 seconds
-  3,312 ops per second
+  Test took: 6.303 seconds
+  1,587 ops per second
 
 
- r 2.12.0-rc0
-  Test took: 3.593 seconds
-  2,783 ops per second
+Int
+  Test took: 5.482 seconds
+  1,824 ops per second
 
-  Test took: 4.141 seconds
-  2,415 ops per second
+  Test took: 5.829 seconds
+  1,716 ops per second
 
-  Test took: 4.421 seconds
-  2,262 ops per second
+  Test took: 5.864 seconds
+  1,705 ops per second
+
