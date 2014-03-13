@@ -42,6 +42,38 @@ Int
 100 String fields
 Single Server 2.6.0-rc1
 
+Java(TM) SE Runtime Environment (build 1.6.0_65-b14-462-11M4609)
+Java HotSpot(TM) 64-Bit Server VM (build 20.65-b04-462, mixed mode)
+
+Time taken: 2801 millis
+Test took: 2.801 seconds
+3,570 ops per second
+
+Time taken: 2789 millis
+Test took: 2.789 seconds
+3,586 ops per second
+
+Time taken: 2905 millis
+Test took: 2.905 seconds
+3,442 ops per second
+
+
+Java(TM) SE Runtime Environment (build 1.7.0_51-b13)
+Java HotSpot(TM) 64-Bit Server VM (build 24.51-b03, mixed mode)
+
+Time taken: 5389 millis
+Test took: 5.389 seconds
+1,856 ops per second
+
+Time taken: 4847 millis
+Test took: 4.847 seconds
+2,063 ops per second
+
+Time taken: 5095 millis
+Test took: 5.095 seconds
+1,963 ops per second
+
+
 Java(TM) SE Runtime Environment (build 1.8.0-b128)
 Java HotSpot(TM) 64-Bit Server VM (build 25.0-b69, mixed mode)
 
@@ -62,33 +94,49 @@ Test took: 4.209 seconds
 2,376 ops per second
 
 
-Java(TM) SE Runtime Environment (build 1.7.0_51-b13)
-Java HotSpot(TM) 64-Bit Server VM (build 24.51-b03, mixed mode)
+Async disabled (1.7)
+Time taken: 4012 millis
+Test took: 4.012 seconds
+2,493 ops per second
 
-Time taken: 5389 millis
-Test took: 5.389 seconds
-1,856 ops per second
+Time taken: 4247 millis
+Test took: 4.247 seconds
+2,355 ops per second
 
-Time taken: 4847 millis
-Test took: 4.847 seconds
-2,063 ops per second
+Time taken: 4106 millis
+Test took: 4.106 seconds
+2,435 ops per second
 
-Time taken: 5095 millis
-Test took: 5.095 seconds
-1,963 ops per second
 
-Java(TM) SE Runtime Environment (build 1.6.0_65-b14-462-11M4609)
-Java HotSpot(TM) 64-Bit Server VM (build 20.65-b04-462, mixed mode)
+Java(TM) SE Runtime Environment (build 1.8.0-b132)
+Java HotSpot(TM) 64-Bit Server VM (build 25.0-b70, mixed mode)
 
-Time taken: 2801 millis
-Test took: 2.801 seconds
-3,570 ops per second
+Time taken: 4293 millis
+Test took: 4.293 seconds
+2,329 ops per second
 
-Time taken: 2789 millis
-Test took: 2.789 seconds
-3,586 ops per second
+Time taken: 4311 millis
+Test took: 4.311 seconds
+2,320 ops per second
 
-Time taken: 2905 millis
-Test took: 2.905 seconds
-3,442 ops per second
+Time taken: 4276 millis
+Test took: 4.276 seconds
+2,339 ops per second
+
+
+Async disabled (java 1.8)
+
+Time taken: 3190 millis
+Test took: 3.190 seconds
+3,135 ops per second
+
+Time taken: 3322 millis
+Test took: 3.322 seconds
+3,010 ops per second
+
+Time taken: 3389 millis
+Test took: 3.389 seconds
+2,951 ops per second
+
+
 
