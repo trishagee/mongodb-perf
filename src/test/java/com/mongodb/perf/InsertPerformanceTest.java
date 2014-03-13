@@ -16,11 +16,11 @@
 
 package org.mongodb.perf;
 
-import org.mongodb.Fixture;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.mongodb.Document;
+import org.mongodb.Fixture;
 import org.mongodb.MongoCollection;
 import org.mongodb.MongoDatabase;
 
@@ -44,24 +44,27 @@ public class InsertPerformanceTest {
         }
     }
 
-    private void warmup(int numberOfRuns) {
+    private void warmup(int numberOfRuns, final Document document) {
         for (int i = 0; i < numberOfRuns; i++) {
-            collection.insert(new Document("name", "String value"));
+            document.remove("_id");
+            collection.insert(document);
         }
         System.gc();
         System.gc();
     }
 
     @Test
-    public void shouldInsertString() {
+    public void shouldInsertDocumentWithSingleStringField() {
         // Given
-        warmup(10000);
+        Document document = new Document("name", "String value");
+        warmup(10000, document);
         collection.find().remove();
 
         // When
         long startTime = System.currentTimeMillis();
         for (int i = 0; i < NUMBER_OF_OPERATIONS; i++) {
-            collection.insert(new Document("name", "String value"));
+            document.remove("_id");
+            collection.insert(document);
         }
         long endTime = System.currentTimeMillis();
 
@@ -73,37 +76,65 @@ public class InsertPerformanceTest {
     }
 
     @Test
-    public void shouldTimeBudget() {
-        // to be used in association with tools to output the time at different stages.
+    public void shouldInsertDocumentWith100StringValueFields() {
         // Given
-        warmup(10000);
+        Document document = new Document();
+        for (int i = 0; i < 100; i++) {
+            document.put("field"+i, "value "+i);
+        }
+        warmup(10000, document);
         collection.find().remove();
 
         // When
+        long startTime = System.currentTimeMillis();
+        for (int i = 0; i < NUMBER_OF_OPERATIONS; i++) {
+            document.remove("_id");
+            collection.insert(document);
+        }
+        long endTime = System.currentTimeMillis();
+
+        // Then
+        long timeTaken = endTime - startTime;
+        System.out.printf("Time taken: %d millis\n", timeTaken);
+        System.out.printf("Test took: %,.3f seconds\n", timeTaken / NUM_MILLIS_IN_SECOND);
+        System.out.printf("%,.0f ops per second%n", (NUM_MILLIS_IN_SECOND / timeTaken) * NUMBER_OF_OPERATIONS);
+
+    }
+
+    @Test
+    public void shouldTimeBudgetSync() {
+        // Given
+        warmup(10000, new Document("name", "String value"));
+        collection.find().remove();
+
+        System.out.println("Starting Benchmark");
+        // When
         long startTime = System.nanoTime();
+        System.out.printf("%d, start time\n", startTime);
         for (int i = 0; i < 1; i++) {
             collection.insert(new Document("name", "String value"));
         }
         long endTime = System.nanoTime();
 
         // Then
-        System.out.println(startTime);
-        System.out.println(endTime);
+        System.out.printf("%d, end time\n", endTime);
         long timeTaken = endTime - startTime;
         System.out.printf("Time taken: %d nanos\n", timeTaken);
-        //1613000 nanos
+        //1619000 nanos
     }
 
     @Test
     public void shouldInsertInt() {
         // Given
-        warmup(10000);
+        Document document = new Document("name", 1);
+        warmup(10000, document);
         collection.find().remove();
 
         // When
         long startTime = System.currentTimeMillis();
         for (int i = 0; i < NUMBER_OF_OPERATIONS; i++) {
-            collection.insert(new Document("name", 1));
+            document.remove("_id");
+            collection.insert(document);
         }
         long endTime = System.currentTimeMillis();
 
@@ -112,5 +143,31 @@ public class InsertPerformanceTest {
         System.out.printf("Time taken: %d millis\n", timeTaken);
         System.out.printf("Test took: %,.3f seconds\n", timeTaken / NUM_MILLIS_IN_SECOND);
         System.out.printf("%,.0f ops per second%n", (NUM_MILLIS_IN_SECOND / timeTaken) * NUMBER_OF_OPERATIONS);
+    }
+
+    @Test
+    public void shouldInsertDocumentWith100IntValueFields() {
+        // Given
+        Document document = new Document();
+        for (int i = 0; i < 100; i++) {
+            document.put("field"+i, i);
+        }
+        warmup(10000, document);
+        collection.find().remove();
+
+        // When
+        long startTime = System.currentTimeMillis();
+        for (int i = 0; i < NUMBER_OF_OPERATIONS; i++) {
+            document.remove("_id");
+            collection.insert(document);
+        }
+        long endTime = System.currentTimeMillis();
+
+        // Then
+        long timeTaken = endTime - startTime;
+        System.out.printf("Time taken: %d millis\n", timeTaken);
+        System.out.printf("Test took: %,.3f seconds\n", timeTaken / NUM_MILLIS_IN_SECOND);
+        System.out.printf("%,.0f ops per second%n", (NUM_MILLIS_IN_SECOND / timeTaken) * NUMBER_OF_OPERATIONS);
+
     }
 }

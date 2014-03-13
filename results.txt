@@ -1,3 +1,9 @@
+MacBook Air
+ - OSX 10.9.2 (13C64)
+ - 1.8 GHz Intel Core i5
+ - 4GB 1600 MHz DDR3
+ - SSD 19GB free
+
 String
         // at commit c4fb7772850d619922ea7c843671b98543dc64c0
         //        Time taken: 6079 millis
@@ -31,4 +37,58 @@ Int
 
   Test took: 5.864 seconds
   1,705 ops per second
+
+
+100 String fields
+Single Server 2.6.0-rc1
+
+Java(TM) SE Runtime Environment (build 1.8.0-b128)
+Java HotSpot(TM) 64-Bit Server VM (build 25.0-b69, mixed mode)
+
+Time taken: 4339 millis
+Test took: 4.339 seconds
+2,305 ops per second
+
+Time taken: 4266 millis
+Test took: 4.266 seconds
+2,344 ops per second
+
+Time taken: 4309 millis
+Test took: 4.309 seconds
+2,321 ops per second
+
+Time taken: 4209 millis
+Test took: 4.209 seconds
+2,376 ops per second
+
+
+Java(TM) SE Runtime Environment (build 1.7.0_51-b13)
+Java HotSpot(TM) 64-Bit Server VM (build 24.51-b03, mixed mode)
+
+Time taken: 5389 millis
+Test took: 5.389 seconds
+1,856 ops per second
+
+Time taken: 4847 millis
+Test took: 4.847 seconds
+2,063 ops per second
+
+Time taken: 5095 millis
+Test took: 5.095 seconds
+1,963 ops per second
+
+Java(TM) SE Runtime Environment (build 1.6.0_65-b14-462-11M4609)
+Java HotSpot(TM) 64-Bit Server VM (build 20.65-b04-462, mixed mode)
+
+Time taken: 2801 millis
+Test took: 2.801 seconds
+3,570 ops per second
+
+Time taken: 2789 millis
+Test took: 2.789 seconds
+3,586 ops per second
+
+Time taken: 2905 millis
+Test took: 2.905 seconds
+3,442 ops per second
 
