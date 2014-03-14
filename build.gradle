@@ -9,7 +9,7 @@ repositories {
 }
 
 dependencies {
-    testCompile 'org.mongodb:mongodb-driver:3.0.0-SNAPSHOT'
+    testCompile 'org.mongodb:mongo-java-driver:3.0.0-SNAPSHOT'
 
     testCompile group: 'junit', name: 'junit', version: '4.11'
 }
