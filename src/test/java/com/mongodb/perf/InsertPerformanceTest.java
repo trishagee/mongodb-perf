@@ -44,6 +44,9 @@ public class InsertPerformanceTest {
         if (collection != null) {
             collection.drop();
         }
+        if (database != null) {
+            database.dropDatabase();
+        }
     }
 
     private void warmup(int numberOfRuns, final DBObject document) {
@@ -101,27 +104,6 @@ public class InsertPerformanceTest {
         System.out.printf("Test took: %,.3f seconds\n", timeTaken / NUM_MILLIS_IN_SECOND);
         System.out.printf("%,.0f ops per second%n", (NUM_MILLIS_IN_SECOND / timeTaken) * NUMBER_OF_OPERATIONS);
 
-    }
-
-    @Test
-    public void shouldTimeBudget() {
-        collection.remove(new BasicDBObject());
-
-        System.out.println("Starting Benchmark");
-        // When
-        long startTime = System.nanoTime();
-        System.out.printf("%d, start time\n", startTime);
-        for (int i = 0; i < 1; i++) {
-            collection.insert(new BasicDBObject("name", "String value"));
-        }
-        long endTime = System.nanoTime();
-
-        // Then
-        System.out.printf("%d, end time\n", endTime);
-        long timeTaken = endTime - startTime;
-        System.out.printf("Time taken: %d nanos\n", timeTaken);
-        //205 638 000 nanos
-        //191 837 000 nanos
     }
 
     @Test
