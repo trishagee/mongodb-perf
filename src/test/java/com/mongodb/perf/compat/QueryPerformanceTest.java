@@ -81,13 +81,7 @@ public class QueryPerformanceTest {
 
     @Test
     public void testPerformanceOfQueryForSingleDocumentWith100Fields() {
-        warmup(10_000, new BasicDBObject("test", "Document"));
-        collection.remove(new BasicDBObject());
-        BasicDBObject document = new BasicDBObject();
-        for (int i = 0; i < 100; i++) {
-            document.put("field"+i, "value "+i);
-        }
-        populateCollection(100, document);
+        warmupAndInit();
 
         //this array stops the loop from being optimized away by hotspot
         DBObject[] resultArrayToAvoidOptimization = new BasicDBObject[NUMBER_OF_OPERATIONS];
@@ -107,6 +101,16 @@ public class QueryPerformanceTest {
         System.out.printf("%.0f ops per second%n", operationsPerSecond);
         System.out.printf("Test,Ops per Second,Time Taken Millis, %n");
         System.out.printf("Query Single Document 100 fields,%.0f,%d, %n", operationsPerSecond, timeTaken);
+    }
+
+    private void warmupAndInit() {
+        warmup(10_000, new BasicDBObject("test", "Document"));
+        collection.remove(new BasicDBObject());
+        BasicDBObject document = new BasicDBObject();
+        for (int i = 0; i < 100; i++) {
+            document.put("field"+i, "value "+i);
+        }
+        populateCollection(100, document);
     }
 
 }

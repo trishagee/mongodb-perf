@@ -5,8 +5,19 @@ Query Single Document,3886,5147,
 Query Single Document,3815,5243, 
 Query Single Document,3704,5400, 
 
+Test,Ops per Second,Time Taken Millis, (With Limit) 
+Query Single Document,5877,34029, 
+Query Single Document,5829,34313, 
+Query Single Document,5902,33888, 
+Query Single Document,5533,36150, 
+Query Single Document,5700,35086, 
 
 Test,Ops per Second,Time Taken Millis, 
 Query Single Document 100 fields,240,83285,
 Query Single Document 100 fields,246,81361,
 Query Single Document 100 fields,244,81859, 
+
+Test,Ops per Second,Time Taken Millis, (With Limit)
+Query Single Document 100 fields,2100,9526, 
+Query Single Document 100 fields,2156,9275, 
+Query Single Document 100 fields,2448,8170, 
