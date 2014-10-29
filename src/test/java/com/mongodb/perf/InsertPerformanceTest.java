@@ -75,7 +75,10 @@ public class InsertPerformanceTest {
         long timeTaken = endTime - startTime;
         System.out.printf("Time taken: %d millis\n", timeTaken);
         System.out.printf("Test took: %,.3f seconds\n", timeTaken / NUM_MILLIS_IN_SECOND);
-        System.out.printf("%.0f ops per second%n", (NUM_MILLIS_IN_SECOND / timeTaken) * NUMBER_OF_OPERATIONS);
+        double operationsPerSecond = (NUM_MILLIS_IN_SECOND / timeTaken) * NUMBER_OF_OPERATIONS;
+        System.out.printf("%.0f ops per second%n", operationsPerSecond);
+        System.out.printf("Test,Ops per Second,Time Taken Millis, %n");
+        System.out.printf("Single String field,%.0f,%d, %n", operationsPerSecond, timeTaken);
     }
 
     @Test
@@ -100,8 +103,10 @@ public class InsertPerformanceTest {
         long timeTaken = endTime - startTime;
         System.out.printf("Time taken: %d millis\n", timeTaken);
         System.out.printf("Test took: %,.3f seconds\n", timeTaken / NUM_MILLIS_IN_SECOND);
-        System.out.printf("%.0f ops per second%n", (NUM_MILLIS_IN_SECOND / timeTaken) * NUMBER_OF_OPERATIONS);
-
+        double operationsPerSecond = (NUM_MILLIS_IN_SECOND / timeTaken) * NUMBER_OF_OPERATIONS;
+        System.out.printf("%.0f ops per second%n", operationsPerSecond);
+        System.out.printf("Test,Ops per Second,Time Taken Millis, %n");
+        System.out.printf("100 String fields,%.0f,%d, %n", operationsPerSecond, timeTaken);
     }
 
     @Test
@@ -123,7 +128,10 @@ public class InsertPerformanceTest {
         long timeTaken = endTime - startTime;
         System.out.printf("Time taken: %d millis\n", timeTaken);
         System.out.printf("Test took: %,.3f seconds\n", timeTaken / NUM_MILLIS_IN_SECOND);
-        System.out.printf("%.0f ops per second%n", (NUM_MILLIS_IN_SECOND / timeTaken) * NUMBER_OF_OPERATIONS);
+        double operationsPerSecond = (NUM_MILLIS_IN_SECOND / timeTaken) * NUMBER_OF_OPERATIONS;
+        System.out.printf("%.0f ops per second%n", operationsPerSecond);
+        System.out.printf("Test,Ops per Second,Time Taken Millis, %n");
+        System.out.printf("Single int field,%.0f,%d, %n", operationsPerSecond, timeTaken);
     }
 
     @Test
@@ -148,7 +156,9 @@ public class InsertPerformanceTest {
         long timeTaken = endTime - startTime;
         System.out.printf("Time taken: %d millis\n", timeTaken);
         System.out.printf("Test took: %,.3f seconds\n", timeTaken / NUM_MILLIS_IN_SECOND);
-        System.out.printf("%.0f ops per second%n", (NUM_MILLIS_IN_SECOND / timeTaken) * NUMBER_OF_OPERATIONS);
-
+        double operationsPerSecond = (NUM_MILLIS_IN_SECOND / timeTaken) * NUMBER_OF_OPERATIONS;
+        System.out.printf("%.0f ops per second%n", operationsPerSecond);
+        System.out.printf("Test,Ops per Second,Time Taken Millis, %n");
+        System.out.printf("100 int fields,%.0f,%d, %n", operationsPerSecond, timeTaken);
     }
 }
