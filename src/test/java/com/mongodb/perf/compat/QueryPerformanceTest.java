@@ -4,12 +4,10 @@ import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
 import com.mongodb.DBObject;
+import org.bson.Document;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class QueryPerformanceTest {
     private static final int NUMBER_OF_OPERATIONS = 20_000;
@@ -34,7 +32,6 @@ public class QueryPerformanceTest {
             database.dropDatabase();
         }
     }
-
 
     private void warmup(final int numberOfRuns, final DBObject document) {
         DBObject found = null;
@@ -62,7 +59,7 @@ public class QueryPerformanceTest {
         collection.remove(new BasicDBObject());
         populateCollection(100, new BasicDBObject("name", "String value"));
 
-        //test with array
+        //this array stops the loop from being optimized away by hotspot
         DBObject[] resultArrayToAvoidOptimization = new BasicDBObject[NUMBER_OF_OPERATIONS];
 
         // When
@@ -80,6 +77,36 @@ public class QueryPerformanceTest {
         System.out.printf("%.0f ops per second%n", operationsPerSecond);
         System.out.printf("Test,Ops per Second,Time Taken Millis, %n");
         System.out.printf("Query Single Document,%.0f,%d, %n", operationsPerSecond, timeTaken);
+    }
+
+    @Test
+    public void testPerformanceOfQueryForSingleDocumentWith100Fields() {
+        warmup(10_000, new BasicDBObject("test", "Document"));
+        collection.remove(new BasicDBObject());
+        BasicDBObject document = new BasicDBObject();
+        for (int i = 0; i < 100; i++) {
+            document.put("field"+i, "value "+i);
+        }
+        populateCollection(100, document);
+
+        //this array stops the loop from being optimized away by hotspot
+        DBObject[] resultArrayToAvoidOptimization = new BasicDBObject[NUMBER_OF_OPERATIONS];
+
+        // When
+        long startTime = System.currentTimeMillis();
+        for (int i = 0; i < NUMBER_OF_OPERATIONS; i++) {
+            resultArrayToAvoidOptimization[i] = collection.find().one();
+        }
+        long endTime = System.currentTimeMillis();
+
+        // Then
+        long timeTaken = endTime - startTime;
+        System.out.printf("Time taken: %d millis\n", timeTaken);
+        System.out.printf("Test took: %,.3f seconds\n", timeTaken / NUM_MILLIS_IN_SECOND);
+        double operationsPerSecond = (NUM_MILLIS_IN_SECOND / timeTaken) * NUMBER_OF_OPERATIONS;
+        System.out.printf("%.0f ops per second%n", operationsPerSecond);
+        System.out.printf("Test,Ops per Second,Time Taken Millis, %n");
+        System.out.printf("Query Single Document 100 fields,%.0f,%d, %n", operationsPerSecond, timeTaken);
     }
 
 }

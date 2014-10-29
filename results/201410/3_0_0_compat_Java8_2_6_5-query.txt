@@ -5,3 +5,8 @@ Query Single Document,5292,3779,
 Query Single Document,5432,3682, 
 Query Single Document,5677,3523,
 Query Single Document,5309,3767, 
+
+Test,Ops per Second,Time Taken Millis, 
+Query Single Document 100 fields,1862,10742, 
+Query Single Document 100 fields,1854,10789, 
+Query Single Document 100 fields,1841,10861, 

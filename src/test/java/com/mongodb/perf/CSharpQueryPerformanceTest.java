@@ -1,43 +1,39 @@
-package com.mongodb.perf.compat;
+package com.mongodb.perf;
 
-import com.mongodb.BasicDBObject;
-import com.mongodb.DB;
-import com.mongodb.DBCollection;
-import com.mongodb.DBObject;
-import com.mongodb.perf.compat.Fixture;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
+import org.bson.Document;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 public class CSharpQueryPerformanceTest {
     private static final double NUM_MILLIS_IN_SECOND = 1000;
-
-    private DB database;
-    private DBCollection collection;
+    private MongoCollection<Document> collection;
+    private MongoDatabase database;
 
     @Before
     public void setUp() {
-        database = Fixture.getDefaultDatabase();
+        database = com.mongodb.Fixture.getDefaultDatabase();
         collection = database.getCollection(this.getClass().getName());
-        collection.drop();
+        collection.dropCollection();
     }
-
     @After
     public void tearDown() {
         if (collection != null) {
-            collection.drop();
+            collection.dropCollection();
         }
         if (database != null) {
             database.dropDatabase();
         }
     }
 
-    private void warmup(int numberOfRuns, final DBObject document) {
-        DBObject one = null;
+    private void warmup(int numberOfRuns, final Document document) {
+        Document one = null;
         for (int i = 0; i < numberOfRuns; i++) {
-            document.removeField("_id");
-            collection.insert(document);
-            one = collection.find().one();
+            document.remove("_id");
+            collection.insertOne(document);
+            one = collection.find().first();
         }
         System.out.println(one);
         System.gc();
@@ -48,9 +44,9 @@ public class CSharpQueryPerformanceTest {
     @Test
     public void shouldReadDocuments() {
         // given
-        DBObject document = new BasicDBObject("name", "String value");
+        Document document = new Document("name", "String value");
         warmup(10000, document);
-        collection.remove(new BasicDBObject());
+        collection.deleteMany(new Document());
 
         // When
         runBenchmarks(collection, 1, 1, 1);
@@ -67,31 +63,31 @@ public class CSharpQueryPerformanceTest {
         }
     }
 
-    private static void runBenchmarks(DBCollection collection, int iterations, int numberOfDocuments,
+    private static void runBenchmarks(MongoCollection<Document> collection, int iterations, int numberOfDocuments,
                                       int documentSize) {
         createData(collection, numberOfDocuments, documentSize);
         runBenchmark(collection, iterations, numberOfDocuments);
     }
 
-    private static void createData(DBCollection collection, int numberOfDocuments, int documentSize) {
-        collection.drop();
+    private static void createData(MongoCollection<Document> collection, int numberOfDocuments, int documentSize) {
+        collection.dropCollection();
 
         String fillerString = new String(new char[documentSize]).replace("\0", "x");
 
         for (int id = 0; id < numberOfDocuments; id++) {
-            DBObject document = new BasicDBObject("_id", id).append("filler", fillerString);
-            collection.insert(document);
+            Document document = new Document("_id", id).append("filler", fillerString);
+            collection.insertOne(document);
         }
     }
 
-    private static void runBenchmark(DBCollection collection, int iterations, int numberOfDocuments) {
-        DBObject document = collection.find().one();
+    private static void runBenchmark(MongoCollection<Document> collection, int iterations, int numberOfDocuments) {
+        Document document = collection.find().first();
 
         int totalNumberOfDocumentsRead = 0;
         long startTime = System.currentTimeMillis();
         for (int i = 0; i < iterations; i++) {
             for (int n = 0; n < numberOfDocuments; n++) {
-                document = collection.find().one();
+                document = collection.find().first();
                 totalNumberOfDocumentsRead += 1;
             }
         }

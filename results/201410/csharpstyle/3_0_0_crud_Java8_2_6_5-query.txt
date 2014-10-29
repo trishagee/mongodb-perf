@@ -1,0 +1,17 @@
+Benchmarking documents of size: 1
+Read 1000 documents in 350 millis, 2857.1 documents/second
+Read 10000 documents in 2194 millis, 4557.9 documents/second
+Read 100000 documents in 25694 millis, 3892.0 documents/second
+Read 1000000 documents in 279206 millis, 3581.6 documents/second
+
+Benchmarking documents of size: 100
+Read 1000 documents in 164 millis, 6097.6 documents/second
+Read 10000 documents in 1749 millis, 5717.6 documents/second
+Read 100000 documents in 26891 millis, 3718.7 documents/second
+Read 1000000 documents in 282798 millis, 3536.1 documents/second
+
+Benchmarking documents of size: 1000
+Read 1000 documents in 170 millis, 5882.4 documents/second
+Read 10000 documents in 1933 millis, 5173.3 documents/second
+Read 100000 documents in 44082 millis, 2268.5 documents/second
+Read 1000000 documents in 482371 millis, 2073.1 documents/second
