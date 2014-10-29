@@ -1,11 +1,9 @@
+import com.mongodb.MongoClient;
+import com.mongodb.ServerAddress;
+import com.mongodb.client.MongoCollection;
+import org.bson.Document;
 import org.junit.Test;
-import org.mongodb.Document;
-import org.mongodb.MongoClient;
-import org.mongodb.MongoClients;
-import org.mongodb.MongoCollection;
-import org.mongodb.connection.ServerAddress;
 
-import javax.print.Doc;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +15,7 @@ import static java.lang.System.out;
 public class InsertBatchPerformanceTest {
     @Test
     public void should() throws UnknownHostException {
-        MongoClient mongoClient = MongoClients.create(new ServerAddress());
+        MongoClient mongoClient = new MongoClient(new ServerAddress());
         try {
             MongoCollection<Document> coll = mongoClient.getDatabase("test").getCollection("test");
 
@@ -54,17 +52,17 @@ public class InsertBatchPerformanceTest {
         out.println(format("Benchmarking documentSize=%d batchSize=%d", ((String) documents.get(0).get("filler")).length(),
                            documents.size()));
 
-        collection.tools().drop();
+        collection.dropCollection();
 
         long startTime = System.currentTimeMillis();
 
         for (int i = 0; i < batchCount; i++) {
             removeDocumentIds(documents);
-            collection.insert(documents);
+            collection.insertMany(documents);
         }
 
         long elapsed = System.currentTimeMillis() - startTime;
-        long count = collection.find().count();
+        long count = collection.count();
         out.println("Count: " + count);
         out.println(format("Duration = %d Speed=%2$,.2f/second", elapsed, count / (elapsed / 1000.0)));
         out.println();

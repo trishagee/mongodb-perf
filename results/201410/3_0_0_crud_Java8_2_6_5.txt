@@ -1,0 +1,60 @@
+
+------------------
+shouldInsertString
+------------------
+Time taken: 3239 millis
+Test took: 3.239 seconds
+3,087 ops per second
+
+Time taken: 2947 millis
+Test took: 2.947 seconds
+3,393 ops per second
+
+Time taken: 3178 millis
+Test took: 3.178 seconds
+3,147 ops per second
+
+------------------
+shouldInsertDocumentWith100StringValueFields
+------------------
+Time taken: 4259 millis
+Test took: 4.259 seconds
+2,348 ops per second
+
+Time taken: 4614 millis
+Test took: 4.614 seconds
+2,167 ops per second
+
+Time taken: 3396 millis
+Test took: 3.396 seconds
+2,945 ops per second
+
+------------------
+shouldInsertInt
+------------------
+Time taken: 3132 millis
+Test took: 3.132 seconds
+3,193 ops per second
+
+Time taken: 2814 millis
+Test took: 2.814 seconds
+3,554 ops per second
+
+Time taken: 3134 millis
+Test took: 3.134 seconds
+3,191 ops per second
+
+------------------
+shouldInsertDocumentWith100IntValueFields
+------------------
+Time taken: 4182 millis
+Test took: 4.182 seconds
+2,391 ops per second
+
+Time taken: 3608 millis
+Test took: 3.608 seconds
+2,772 ops per second
+
+Time taken: 3765 millis
+Test took: 3.765 seconds
+2,656 ops per second

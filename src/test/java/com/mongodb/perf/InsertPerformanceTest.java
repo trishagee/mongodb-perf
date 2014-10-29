@@ -16,13 +16,13 @@
 
 package org.mongodb.perf;
 
+import com.mongodb.Fixture;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
+import org.bson.Document;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.mongodb.Document;
-import org.mongodb.Fixture;
-import org.mongodb.MongoCollection;
-import org.mongodb.MongoDatabase;
 
 public class InsertPerformanceTest {
     private static final int NUMBER_OF_OPERATIONS = 10000;
@@ -34,20 +34,23 @@ public class InsertPerformanceTest {
     public void setUp() {
         database = Fixture.getDefaultDatabase();
         collection = database.getCollection(this.getClass().getName());
-        collection.tools().drop();
+        collection.dropCollection();
     }
 
     @After
     public void tearDown() {
         if (collection != null) {
-            collection.tools().drop();
+            collection.dropCollection();
+        }
+        if (database != null) {
+            database.dropDatabase();
         }
     }
 
     private void warmup(int numberOfRuns, final Document document) {
         for (int i = 0; i < numberOfRuns; i++) {
             document.remove("_id");
-            collection.insert(document);
+            collection.insertOne(document);
         }
         System.gc();
         System.gc();
@@ -58,13 +61,13 @@ public class InsertPerformanceTest {
         // Given
         Document document = new Document("name", "String value");
         warmup(10000, document);
-        collection.find().remove();
+        collection.deleteMany(new Document());
 
         // When
         long startTime = System.currentTimeMillis();
         for (int i = 0; i < NUMBER_OF_OPERATIONS; i++) {
             document.remove("_id");
-            collection.insert(document);
+            collection.insertOne(document);
         }
         long endTime = System.currentTimeMillis();
 
@@ -72,7 +75,7 @@ public class InsertPerformanceTest {
         long timeTaken = endTime - startTime;
         System.out.printf("Time taken: %d millis\n", timeTaken);
         System.out.printf("Test took: %,.3f seconds\n", timeTaken / NUM_MILLIS_IN_SECOND);
-        System.out.printf("%,.0f ops per second%n", (NUM_MILLIS_IN_SECOND / timeTaken) * NUMBER_OF_OPERATIONS);
+        System.out.printf("%.0f ops per second%n", (NUM_MILLIS_IN_SECOND / timeTaken) * NUMBER_OF_OPERATIONS);
     }
 
     @Test
@@ -83,13 +86,13 @@ public class InsertPerformanceTest {
             document.put("field"+i, "value "+i);
         }
         warmup(10000, document);
-        collection.find().remove();
+        collection.deleteMany(new Document());
 
         // When
         long startTime = System.currentTimeMillis();
         for (int i = 0; i < NUMBER_OF_OPERATIONS; i++) {
             document.remove("_id");
-            collection.insert(document);
+            collection.insertOne(document);
         }
         long endTime = System.currentTimeMillis();
 
@@ -97,30 +100,8 @@ public class InsertPerformanceTest {
         long timeTaken = endTime - startTime;
         System.out.printf("Time taken: %d millis\n", timeTaken);
         System.out.printf("Test took: %,.3f seconds\n", timeTaken / NUM_MILLIS_IN_SECOND);
-        System.out.printf("%,.0f ops per second%n", (NUM_MILLIS_IN_SECOND / timeTaken) * NUMBER_OF_OPERATIONS);
+        System.out.printf("%.0f ops per second%n", (NUM_MILLIS_IN_SECOND / timeTaken) * NUMBER_OF_OPERATIONS);
 
-    }
-
-    @Test
-    public void shouldTimeBudgetSync() {
-        // Given
-        warmup(10000, new Document("name", "String value"));
-        collection.find().remove();
-
-        System.out.println("Starting Benchmark");
-        // When
-        long startTime = System.nanoTime();
-        System.out.printf("%d, start time\n", startTime);
-        for (int i = 0; i < 1; i++) {
-            collection.insert(new Document("name", "String value"));
-        }
-        long endTime = System.nanoTime();
-
-        // Then
-        System.out.printf("%d, end time\n", endTime);
-        long timeTaken = endTime - startTime;
-        System.out.printf("Time taken: %d nanos\n", timeTaken);
-        //1619000 nanos
     }
 
     @Test
@@ -128,13 +109,13 @@ public class InsertPerformanceTest {
         // Given
         Document document = new Document("name", 1);
         warmup(10000, document);
-        collection.find().remove();
+        collection.deleteMany(new Document());
 
         // When
         long startTime = System.currentTimeMillis();
         for (int i = 0; i < NUMBER_OF_OPERATIONS; i++) {
             document.remove("_id");
-            collection.insert(document);
+            collection.insertOne(document);
         }
         long endTime = System.currentTimeMillis();
 
@@ -142,7 +123,7 @@ public class InsertPerformanceTest {
         long timeTaken = endTime - startTime;
         System.out.printf("Time taken: %d millis\n", timeTaken);
         System.out.printf("Test took: %,.3f seconds\n", timeTaken / NUM_MILLIS_IN_SECOND);
-        System.out.printf("%,.0f ops per second%n", (NUM_MILLIS_IN_SECOND / timeTaken) * NUMBER_OF_OPERATIONS);
+        System.out.printf("%.0f ops per second%n", (NUM_MILLIS_IN_SECOND / timeTaken) * NUMBER_OF_OPERATIONS);
     }
 
     @Test
@@ -153,13 +134,13 @@ public class InsertPerformanceTest {
             document.put("field"+i, i);
         }
         warmup(10000, document);
-        collection.find().remove();
+        collection.deleteMany(new Document());
 
         // When
         long startTime = System.currentTimeMillis();
         for (int i = 0; i < NUMBER_OF_OPERATIONS; i++) {
             document.remove("_id");
-            collection.insert(document);
+            collection.insertOne(document);
         }
         long endTime = System.currentTimeMillis();
 
@@ -167,7 +148,7 @@ public class InsertPerformanceTest {
         long timeTaken = endTime - startTime;
         System.out.printf("Time taken: %d millis\n", timeTaken);
         System.out.printf("Test took: %,.3f seconds\n", timeTaken / NUM_MILLIS_IN_SECOND);
-        System.out.printf("%,.0f ops per second%n", (NUM_MILLIS_IN_SECOND / timeTaken) * NUMBER_OF_OPERATIONS);
+        System.out.printf("%.0f ops per second%n", (NUM_MILLIS_IN_SECOND / timeTaken) * NUMBER_OF_OPERATIONS);
 
     }
 }
