@@ -10,7 +10,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class QueryPerformanceTest {
-    private static final int NUMBER_OF_OPERATIONS = 10000;
+    private static final int NUMBER_OF_OPERATIONS = 20_000;
     private static final double NUM_MILLIS_IN_SECOND = 1000;
 
     private DB database;
@@ -33,76 +33,50 @@ public class QueryPerformanceTest {
         }
     }
 
-    private void warmup(int numberOfRuns, final DBObject document) {
-        DBObject one = null;
+    private void warmup(final int numberOfRuns, final DBObject document) {
+        DBObject found = null;
         for (int i = 0; i < numberOfRuns; i++) {
             document.removeField("_id");
             collection.insert(document);
-            one = collection.find().one();
+            found = collection.find().one();
         }
-        System.out.println(one);
+        System.out.println(found);
         System.gc();
         System.gc();
     }
 
-
-    @Test
-    public void shouldReadDocuments() {
-        // given
-        DBObject document = new BasicDBObject("name", "String value");
-        warmup(10000, document);
-        collection.remove(new BasicDBObject());
-
-        // When
-        runBenchmarks(collection, 1, 1, 1);
-
-        int iterations = 1000;
-        int[] documentSizes = new int[]{1, 100, 1000};
-        for (final int documentSize : documentSizes) {
-            System.out.printf("%nBenchmarking documents of size: %d%n", documentSize);
-            int[] numberOfDocuments = new int[]{1, 10, 100, 1000};
-            for (final int number : numberOfDocuments) {
-                runBenchmarks(collection, iterations, number, documentSize);
-
-            }
-        }
-    }
-
-    private static void runBenchmarks(DBCollection collection, int iterations, int numberOfDocuments,
-                                      int documentSize) {
-        createData(collection, numberOfDocuments, documentSize);
-        runBenchmark(collection, iterations, numberOfDocuments);
-    }
-
-    private static void createData(DBCollection collection, int numberOfDocuments, int documentSize) {
-        collection.drop();
-
-        String fillerString = new String(new char[documentSize]).replace("\0", "x");
-
-        for (int id = 0; id < numberOfDocuments; id++) {
-            DBObject document = new BasicDBObject("_id", id).append("filler", fillerString);
+    private void populateCollection(final int numberOfDocuments, final DBObject document) {
+        for (int i = 0; i < numberOfDocuments; i++) {
+            document.removeField("_id");
             collection.insert(document);
         }
     }
 
-    private static void runBenchmark(DBCollection collection, int iterations, int numberOfDocuments) {
-        DBObject document = collection.find().one();
+    @Test
+    public void testPerformanceOfQueryForSingleDocumentWithSingleStringField() {
+        // Given
+        warmup(10_000, new BasicDBObject("test", "Document"));
+        collection.remove(new BasicDBObject());
+        populateCollection(100, new BasicDBObject("name", "String value"));
 
-        int totalNumberOfDocumentsRead = 0;
+        //this array stops the loop from being optimized away by hotspot
+        DBObject[] resultArrayToAvoidOptimization = new BasicDBObject[NUMBER_OF_OPERATIONS];
+
+        // When
         long startTime = System.currentTimeMillis();
-        for (int i = 0; i < iterations; i++) {
-            for (int n = 0; n < numberOfDocuments; n++) {
-                document = collection.find().one();
-                totalNumberOfDocumentsRead += 1;
-            }
+        for (int i = 0; i < NUMBER_OF_OPERATIONS; i++) {
+            resultArrayToAvoidOptimization[i] = collection.find().one();
         }
         long endTime = System.currentTimeMillis();
-        long elapsedMillis = endTime - startTime;
-        double documentsPerSecond = totalNumberOfDocumentsRead / (elapsedMillis / NUM_MILLIS_IN_SECOND);
-        System.out.println(document);
-        System.out.printf("Read %d documents in %d millis, %.1f documents/second%n",
-                          totalNumberOfDocumentsRead,
-                          elapsedMillis,
-                          documentsPerSecond);
+
+        // Then
+        long timeTaken = endTime - startTime;
+        System.out.printf("Time taken: %d millis\n", timeTaken);
+        System.out.printf("Test took: %,.3f seconds\n", timeTaken / NUM_MILLIS_IN_SECOND);
+        double operationsPerSecond = (NUM_MILLIS_IN_SECOND / timeTaken) * NUMBER_OF_OPERATIONS;
+        System.out.printf("%.0f ops per second%n", operationsPerSecond);
+        System.out.printf("Test,Ops per Second,Time Taken Millis, %n");
+        System.out.printf("Query Single Document,%.0f,%d, %n", operationsPerSecond, timeTaken);
     }
+
 }
