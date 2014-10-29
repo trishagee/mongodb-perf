@@ -10,7 +10,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class CSharpQueryPerformanceTest {
-    private static final int NUMBER_OF_OPERATIONS = 10000;
     private static final double NUM_MILLIS_IN_SECOND = 1000;
 
     private DB database;

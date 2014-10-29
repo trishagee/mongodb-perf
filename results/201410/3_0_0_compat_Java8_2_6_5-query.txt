@@ -1,36 +1,7 @@
-Benchmarking documents of size: 1
-Read 1000 documents in 319 millis, 3134.8 documents/second
-Read 10000 documents in 2109 millis, 4741.6 documents/second
-Read 100000 documents in 16269 millis, 6146.7 documents/second
-Read 1000000 documents in 166026 millis, 6023.2 documents/second
-
-Benchmarking documents of size: 100
-Read 1000 documents in 161 millis, 6211.2 documents/second
-Read 10000 documents in 1671 millis, 5984.4 documents/second
-Read 100000 documents in 16210 millis, 6169.0 documents/second
-Read 1000000 documents in 161388 millis, 6196.2 documents/second
-
-Benchmarking documents of size: 1000
-Read 1000 documents in 164 millis, 6097.6 documents/second
-Read 10000 documents in 1646 millis, 6075.3 documents/second
-Read 100000 documents in 16263 millis, 6148.9 documents/second
-Read 1000000 documents in 162700 millis, 6146.3 documents/second
-
-
-Benchmarking documents of size: 1
-Read 1000 documents in 307 millis, 3257.3 documents/second
-Read 10000 documents in 1887 millis, 5299.4 documents/second
-Read 100000 documents in 16534 millis, 6048.1 documents/second
-Read 1000000 documents in 162911 millis, 6138.3 documents/second
-
-Benchmarking documents of size: 100
-Read 1000 documents in 165 millis, 6060.6 documents/second
-Read 10000 documents in 1672 millis, 5980.9 documents/second
-Read 100000 documents in 17048 millis, 5865.8 documents/second
-Read 1000000 documents in 164289 millis, 6086.8 documents/second
-
-Benchmarking documents of size: 1000
-Read 1000 documents in 171 millis, 5848.0 documents/second
-Read 10000 documents in 1690 millis, 5917.2 documents/second
-Read 100000 documents in 16604 millis, 6022.6 documents/second
-Read 1000000 documents in 165387 millis, 6046.4 documents/second
+Test,Ops per Second,Time Taken Millis, 
+Query Single Document,4979,4017,
+Query Single Document,5092,3928, 
+Query Single Document,5292,3779, 
+Query Single Document,5432,3682, 
+Query Single Document,5677,3523,
+Query Single Document,5309,3767, 

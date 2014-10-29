@@ -1,0 +1,6 @@
+Test,Ops per Second,Time Taken Millis, 
+Query Single Document,3567,5607, 
+Query Single Document,3779,5292, 
+Query Single Document,3886,5147, 
+Query Single Document,3815,5243, 
+Query Single Document,3704,5400, 
