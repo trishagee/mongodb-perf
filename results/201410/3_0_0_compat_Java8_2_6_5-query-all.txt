@@ -1,0 +1,14 @@
+Test,Ops per Second,Time Taken Millis, 
+Query 1000 Documents,651,30699, 
+Query 1000 Documents,666,30044, 
+Query 1000 Documents,644,31043, 
+Query 1000 Documents,665,30065, 
+Query 1000 Documents,628,31847, 
+
+
+Test,Ops per Second,Time Taken Millis, 
+Query 1000 Documents 100 fields,26,765825,
+Query 1000 Documents 100 fields,25,81200,
+Query 1000 Documents 100 fields,24,81931, 
+Query 1000 Documents 100 fields,23,88711, 
+Query 1000 Documents 100 fields,24,82162, 
