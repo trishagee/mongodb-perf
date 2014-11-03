@@ -1,0 +1,6 @@
+Test,Ops per Second,Time Taken Millis, 
+Delete Single Document,5921,3378, 
+Delete Single Document,5905,3387, 
+Delete Single Document,5992,3338, 
+Delete Single Document,5921,3378, 
+Delete Single Document,5940,3367, 
