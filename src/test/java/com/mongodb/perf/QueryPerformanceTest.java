@@ -10,7 +10,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class QueryPerformanceTest {
-    private static final int NUMBER_OF_OPERATIONS = 200_000;
+    private static final int NUMBER_OF_OPERATIONS = 20_000;
     private static final double NUM_MILLIS_IN_SECOND = 1000;
     private MongoCollection<Document> collection;
     private MongoDatabase database;

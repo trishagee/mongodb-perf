@@ -12,6 +12,14 @@ Query Single Document,5902,33888,
 Query Single Document,5533,36150, 
 Query Single Document,5700,35086, 
 
+Version 526b9c2 (no limit)
+Test,Ops per Second,Time Taken Millis, 
+Query Single Document,6293,3178, 
+Query Single Document,5672,3526, 
+Query Single Document,6234,3208,
+Query Single Document,5599,3572, 
+Query Single Document,5256,3805, 
+
 Test,Ops per Second,Time Taken Millis, 
 Query Single Document 100 fields,240,83285,
 Query Single Document 100 fields,246,81361,
@@ -21,3 +29,9 @@ Test,Ops per Second,Time Taken Millis, (With Limit)
 Query Single Document 100 fields,2100,9526, 
 Query Single Document 100 fields,2156,9275, 
 Query Single Document 100 fields,2448,8170, 
+
+Version 526b9c2 (no limit)
+Test,Ops per Second,Time Taken Millis, 
+Query Single Document 100 fields,2094,9549, 
+Query Single Document 100 fields,1961,10201, 
+Query Single Document 100 fields,2096,9544,

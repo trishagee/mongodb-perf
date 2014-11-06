@@ -4,3 +4,12 @@ Update Single Document,3743,5343,
 Update Single Document,3684,5429, 
 Update Single Document,3829,5223, 
 Update Single Document,3785,5284, 
+
+
+Version 526b9c2
+Test,Ops per Second,Time Taken Millis, 
+Update Single Document,4572,4374, 
+Update Single Document,4624,4325, 
+Update Single Document,4592,4355, 
+Update Single Document,4535,4410, 
+Update Single Document,4658,4294, 

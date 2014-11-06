@@ -14,6 +14,14 @@ Time taken: 3178 millis
 Test took: 3.178 seconds
 3,147 ops per second
 
+Version 526b9c2 
+Test,Ops per Second,Time Taken Millis, 
+Single String field,3475,2878, 
+Single String field,3400,2941, 
+Single String field,3457,2893, 
+Single String field,3359,2977, 
+Single String field,3142,3183, 
+
 ------------------
 shouldInsertDocumentWith100StringValueFields
 ------------------
@@ -28,6 +36,14 @@ Test took: 4.614 seconds
 Time taken: 3396 millis
 Test took: 3.396 seconds
 2,945 ops per second
+
+Version 526b9c2 
+Test,Ops per Second,Time Taken Millis, 
+100 String fields,2714,3684, 
+100 String fields,2759,3624, 
+100 String fields,2557,3911, 
+100 String fields,2711,3688, 
+100 String fields,2767,3614, 
 
 ------------------
 shouldInsertInt
@@ -58,3 +74,5 @@ Test took: 3.608 seconds
 Time taken: 3765 millis
 Test took: 3.765 seconds
 2,656 ops per second
+
+

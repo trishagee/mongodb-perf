@@ -4,3 +4,12 @@ Delete Single Document,4537,4408,
 Delete Single Document,4760,4202, 
 Delete Single Document,4661,4291, 
 Delete Single Document,4699,4256, 
+
+
+Version 526b9c2
+Test,Ops per Second,Time Taken Millis, 
+Delete Single Document,5931,3372, 
+Delete Single Document,5990,3339, 
+Delete Single Document,5896,3392, 
+Delete Single Document,5872,3406, 
+Delete Single Document,5905,3387, 

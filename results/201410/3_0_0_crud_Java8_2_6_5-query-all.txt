@@ -5,7 +5,20 @@ Query 1000 Documents,697,28687,
 Query 1000 Documents,689,29040, 
 Query 1000 Documents,698,28636, 
 
+Version 526b9c2 
+Test,Ops per Second,Time Taken Millis, 
+Query 1000 Documents,725,27592, 
+Query 1000 Documents,693,28853, 
+Query 1000 Documents,729,27438, 
+Query 1000 Documents,744,26864, 
+
 Test,Ops per Second,Time Taken Millis, 
 Query 1000 Documents 100 fields,25,81002, 
 Query 1000 Documents 100 fields,27,74522, 
 Query 1000 Documents 100 fields,27,74220, 
+
+Version 526b9c2 
+Test,Ops per Second,Time Taken Millis, 
+Query 1000 Documents 100 fields,28,71080, 
+Query 1000 Documents 100 fields,28,70248, 
+Query 1000 Documents 100 fields,27,73815, 
