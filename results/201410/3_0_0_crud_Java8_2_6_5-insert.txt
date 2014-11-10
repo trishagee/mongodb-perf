@@ -22,6 +22,14 @@ Single String field,3457,2893,
 Single String field,3359,2977, 
 Single String field,3142,3183, 
 
+Version 4e2bbff
+Test,Ops per Second,Time Taken Millis, 
+Single String field,4124,2425, 
+Single String field,4163,2402, 
+Single String field,3914,2555, 
+Single String field,4131,2421, 
+Single String field,3683,2715, 
+
 ------------------
 shouldInsertDocumentWith100StringValueFields
 ------------------
@@ -44,6 +52,14 @@ Test,Ops per Second,Time Taken Millis,
 100 String fields,2557,3911, 
 100 String fields,2711,3688, 
 100 String fields,2767,3614, 
+
+Version 4e2bbff
+Test,Ops per Second,Time Taken Millis, 
+100 String fields,2733,3659, 
+100 String fields,3162,3163, 
+100 String fields,3113,3212, 
+100 String fields,3299,3031, 
+100 String fields,3001,3332, 
 
 ------------------
 shouldInsertInt
